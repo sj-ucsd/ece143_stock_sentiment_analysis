@@ -6,12 +6,16 @@ import datetime as dt
 now = dt.datetime.now()
 prev = now - dt.timedelta(days=2*365+1)
 
-stocks_acronym = ['PANW','AMT','ADI','TMUS','AAPL','ERIC','QCOM','SQ','OKTA','COUP','MELI',
-                    'PYPL','BABA', 'SHOP','NVDA','CRM','AMZN','MSFT','GOOGL']
+# stocks_acronym = ['PANW','AMT','ADI','TMUS','AAPL','ERIC','QCOM','SQ','OKTA','COUP','MELI',
+#                     'PYPL','BABA', 'SHOP','NVDA','CRM','AMZN','MSFT','GOOGL']
 
-stocks_name = ['Palo Alto Networks','American Tower','Analog Devices','T-Mobile','Apple','Ericsson','Qualcomm',
-                'Square','Okta','Coupa Software','MercadoLibre','Paypal','Alibaba','Shopify','NVIDIA',
-                'Salesforce','Amazon','Microsoft','Google']
+# stocks_name = ['Palo Alto Networks','American Tower','Analog Devices','T-Mobile','Apple','Ericsson','Qualcomm',
+#                 'Square','Okta','Coupa Software','MercadoLibre','Paypal','Alibaba','Shopify','NVIDIA',
+#                 'Salesforce','Amazon','Microsoft','Google']
+
+stocks_acronym = ['GME','AMC']
+
+stocks_name = ['GameStop','AMC']
 
 # # Setting variables to be used below
 # maxTweets = 500

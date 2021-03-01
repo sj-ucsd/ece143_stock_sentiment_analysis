@@ -38,12 +38,16 @@ print(os.path.abspath(os.curdir))
 sentimentAnalyser = SentimentIntensityAnalyzer()
 now = dt.datetime.now()
 
-stocks_acronym = ['PANW','AMT','ADI','TMUS','AAPL','ERIC','QCOM','SQ','OKTA','COUP','MELI',
-                    'PYPL','BABA', 'SHOP','NVDA','CRM','AMZN','MSFT','GOOGL']
+# stocks_acronym = ['PANW','AMT','ADI','TMUS','AAPL','ERIC','QCOM','SQ','OKTA','COUP','MELI',
+#                     'PYPL','BABA', 'SHOP','NVDA','CRM','AMZN','MSFT','GOOGL']
 
-stocks_name = ['Palo Alto Networks','American Tower','Analog Devices','T-Mobile','Apple','Ericsson','Qualcomm',
-                'Square','Okta','Coupa Software','MercadoLibre','Paypal','Alibaba','Shopify','NVIDIA',
-                'Salesforce','Amazon','Microsoft','Google']
+# stocks_name = ['Palo Alto Networks','American Tower','Analog Devices','T-Mobile','Apple','Ericsson','Qualcomm',
+#                 'Square','Okta','Coupa Software','MercadoLibre','Paypal','Alibaba','Shopify','NVIDIA',
+#                 'Salesforce','Amazon','Microsoft','Google']
+
+stocks_acronym = ['GME','AMC']
+
+stocks_name = ['GameStop','AMC']
 
 #investing,stocks,wallstreetbets
 api = PushshiftAPI()
