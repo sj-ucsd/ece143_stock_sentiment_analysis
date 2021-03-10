@@ -6,7 +6,8 @@ This project analyzes effect of sentiment from various sources on stock price. S
 
 ## Overall pipeline
 
-![Pipeline](https://user-images.githubusercontent.com/78191747/110584415-0a818c00-8124-11eb-90af-003cc79e57fc.png)
+![Pipeline](https://user-images.githubusercontent.com/78191747/110584695-7bc13f00-8124-11eb-9d63-6fef44b5e0d0.png)
+
 
 
 ## Reddit and Twitter data can be accessed here
