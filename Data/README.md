@@ -1,1 +1,1 @@
-This folder contains all the data from various sources. 
+All of the collected data can be accessed by this [link](https://drive.google.com/drive/folders/1mq1h-McenNptKfEMdPgixeSBerZhIhnc?usp=sharing).
