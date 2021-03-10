@@ -1,7 +1,7 @@
 # ece143_stock_sentiment_analysis
 
 ## Overview
-This project analyzes effect of sentiment from various sources on stock price. See project presentation PDF for details. 
+This project analyzes effect of sentiment from various sources on stock price. See project presentation [link](https://github.com/sj-ucsd/ece143_stock_sentiment_analysis/blob/95b8fc88811a273b48e98c742d9899710c6e220d/ECE143-Group19_Project_presentation.pdf) for details. 
 
 
 
