@@ -24,19 +24,18 @@ def get_yahoo_dataframe(symbol):
 
   return avg_df
 
-def prepare_data_Y_for_ML(df, how_long=7):
+def prepare_data_Y_for_MLP(df, how_long=7):
   # how_long = "weekly": 7, "monthly":40, "Quarterly":90
   advance = df['Adj Close'].shift(-how_long)
   Y = ((advance - df['Adj Close'])/df['Adj Close'])*100
   #Y=Y[how_long:]
   return Y 
 
-symbol='AAPL'
-symlist = ['AAPL', 'ADI', 'AMT', 'AMZN', 'BABA', 'COUP', 'CRM', 'ERIC', 'GOOGL', 'MELI', 'MSFT', 'NVDA', 'OKTA', 'PANW', 'PYPL', 'QCOM', 'SHOP', 'SQ', 'TMUS']
-for symbol in symlist:
-  # df_x=pd.read_csv('/content/gdrive/My Drive/Colab Notebooks/reddit_avg_data/{}_avg.csv'.format(symbol), index_col=0)
-  df=get_yahoo_dataframe(symbol)
-  df["short-term stock"]=prepare_data_Y_for_ML(df, how_long=7)
-  df["mid-term stock"]=prepare_data_Y_for_ML(df, how_long=40)
-  df["long-term stock"]=prepare_data_Y_for_ML(df,how_long=90)
-  df.to_csv('/content/gdrive/My Drive/Colab Notebooks/yahoo_stock_ground_truth/{}_avg.csv'.format(symbol))
+def save_yahoo_stock_financial(symlist=['AAPL', 'ADI', 'AMT', 'AMZN', 'BABA', 'COUP', 'CRM', 'ERIC', 'GOOGL', 'MELI', 'MSFT', 'NVDA', 'OKTA', 'PANW', 'PYPL', 'QCOM', 'SHOP', 'SQ', 'TMUS'], how_long_list=[7,40,90]):
+  for symbol in symlist:
+    # df_x=pd.read_csv('/content/gdrive/My Drive/Colab Notebooks/reddit_avg_data/{}_avg.csv'.format(symbol), index_col=0)
+    df=get_yahoo_dataframe(symbol)
+    df["short-term stock"]=prepare_data_Y_for_MLP(df, how_long=how_long_list[0])
+    df["mid-term stock"]=prepare_data_Y_for_MLP(df, how_long=how_long_list[1])
+    df["long-term stock"]=prepare_data_Y_for_MLP(df,how_long=how_long_list[2])
+    df.to_csv('../Data/Yahoo_stock_financial/{}_avg.csv'.format(symbol))
