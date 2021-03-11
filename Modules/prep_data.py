@@ -6,7 +6,6 @@ import yahooquery
 from pandas_datareader import data
 from datetime import timedelta, date, datetime
 
-#def get_yahoo_dataframe(symbol,start_date='2020-06-01',end_date='2021-01-29'):
 def get_stock_price(symbol,start_date='2020-06-01',end_date='2021-01-29'):
     '''
     :symbol: stock symbol (example: AAPL). Type str
@@ -14,24 +13,50 @@ def get_stock_price(symbol,start_date='2020-06-01',end_date='2021-01-29'):
     :end_date: Date up to which to get data. Date in string format
     Returns pandas dataframe from consisting of stock price history
     '''
+    assert isinstance(symbol, str)
+    assert isinstance(start_date, str)
+    assert isinstance(end_date, str)
     ticker = yahooquery.Ticker(symbol)
     df=data.DataReader(symbol, 'yahoo', start_date, end_date).reset_index()
     df.set_index(pd.to_datetime(df['Date']), inplace=True)
     df = df.drop(['Date'], axis=1)
     return df
 
-def prepare_data_Y_for_MLP(df, how_long=7):
-  # how_long = "weekly": 7, "monthly":40, "Quarterly":90
-  advance = df['Adj Close'].shift(-how_long)
+def prepare_output_data(df, length=7):
+  '''
+  :df: Pandas dataframe with stock price information
+  :length: length over which price change to be calculated
+  returns a pandas series with price change information
+  length = "weekly": 7, "monthly":40, "Quarterly":90
+  '''
+  assert isinstance(length, int)
+  assert isinstance(df,pd.DataFrame)
+  assert 'Adj Close' in df.columns
+  assert length > 0
+  assert length < df.shape[0]
+
+  advance = df['Adj Close'].shift(-length)
   Y = ((advance - df['Adj Close'])/df['Adj Close'])*100
-  #Y=Y[how_long:]
   return Y 
 
-def save_yahoo_stock_financial(symlist=['AAPL', 'ADI', 'AMT', 'AMZN', 'BABA', 'COUP', 'CRM', 'ERIC', 'GOOGL', 'MELI', 'MSFT', 'NVDA', 'OKTA', 'PANW', 'PYPL', 'QCOM', 'SHOP', 'SQ', 'TMUS'], how_long_list=[7,40,90]):
-  for symbol in symlist:
-    # df_x=pd.read_csv('/content/gdrive/My Drive/Colab Notebooks/reddit_avg_data/{}_avg.csv'.format(symbol), index_col=0)
-    df=get_yahoo_dataframe(symbol)
-    df["short-term stock"]=prepare_data_Y_for_MLP(df, how_long=how_long_list[0])
-    df["mid-term stock"]=prepare_data_Y_for_MLP(df, how_long=how_long_list[1])
-    df["long-term stock"]=prepare_data_Y_for_MLP(df,how_long=how_long_list[2])
-    df.to_csv('../Data/Yahoo_stock_financial/{}_avg.csv'.format(symbol))
+def prepare_output_labels(df,length=7, threshold=1):
+  '''
+  :df: Pandas dataframe with stock price
+  :length: over which price change to be calculated
+  :threshold: percentage used to create labels. For example:
+  threshold 1 means if > 1% use label 'up', < 1% use label 'down' 
+  and if in between use label 'neutral
+  '''
+  assert isinstance(length, int)
+  assert isinstance(df,pd.DataFrame)
+  assert 'Adj Close' in df.columns
+  assert isinstance(threshold, int)
+  tmp_df = df['Adj Close'].to_frame()
+  tmp_df['price_change'] = prepare_output_data(df, length)
+  tmp_df['price_labels'] = tmp_df['price_change']
+  #apply thresholds first
+  tmp_df.loc[tmp_df['price_change'] > threshold, 'price_labels' ] = 'up'
+  tmp_df.loc[tmp_df['price_change'] < -threshold, 'price_labels' ] = 'down'
+  tmp_df.loc[(tmp_df['price_change']>-threshold)& \
+             (tmp_df['price_change']<threshold),'price_labels'] ='neutral'
+  return tmp_df['price_labels']
