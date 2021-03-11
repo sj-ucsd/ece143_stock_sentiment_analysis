@@ -59,3 +59,19 @@ def prepare_output_labels(df,length=7, threshold=1):
   tmp_df.loc[(tmp_df['price_change']>-threshold)& \
              (tmp_df['price_change']<threshold),'price_labels'] ='neutral'
   return tmp_df['price_labels']
+
+def get_earnings_data(filename, df):
+  '''
+  :filename: CSV file containing earnings data
+  :df: Pandas dataframe with stock price
+  returns dataframe containing earnings data - index synchronized with df
+  '''
+  assert isinstance(df,pd.DataFrame)
+  assert isinstance(filename, str)
+  
+  earnings_data = pd.read_csv(filename)
+  earnings_data.set_index(pd.to_datetime(earnings_data['Date']), inplace=True)
+  earnings_data = earnings_data.reindex(df.index, method='bfill')
+  earnings_data = earnings_data.drop(['Date','Period Ending'], axis=1)
+  return earnings_data
+  
