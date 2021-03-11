@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import os
-!pip install yahooquery
 import yahooquery
 from pandas_datareader import data
 from datetime import timedelta, date, datetime
