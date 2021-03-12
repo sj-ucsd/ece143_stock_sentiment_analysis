@@ -57,7 +57,7 @@ def get_sentiment_from_news(news):
     sentiment_data = pd.concat([total_sentiment, avg_sentiment], axis=1)
     sentiment_data['weekly average'] = sentiment_data['Daily average'].rolling(7, win_type='triang').sum()
     sentiment_data['weekly average'] = sentiment_data['weekly average'].interpolate()
-    sentiment_data['monthly average'] = sentiment_data['Daily average'].rolling(40, win_type='triang').sum()
+    sentiment_data['monthly average'] = sentiment_data['Daily average'].rolling(20, win_type='triang').sum()
     sentiment_data['monthly average'] = sentiment_data['monthly average'].interpolate()
     sentiment_data['long term average'] = sentiment_data['Daily average'].rolling(90, win_type='triang').sum()
     sentiment_data['long term average'] = sentiment_data['long term average'].interpolate()

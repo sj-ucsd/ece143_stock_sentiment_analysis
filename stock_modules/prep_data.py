@@ -54,8 +54,8 @@ def prepare_output_labels(df,length=7, threshold=1):
   tmp_df['price_change'] = prepare_output_data(df, length)
   tmp_df['price_labels'] = tmp_df['price_change']
   #apply thresholds first
-  tmp_df.loc[tmp_df['price_change'] > threshold, 'price_labels' ] = 'up'
-  tmp_df.loc[tmp_df['price_change'] < -threshold, 'price_labels' ] = 'down'
+  tmp_df.loc[tmp_df['price_change'] >= threshold, 'price_labels' ] = 'up'
+  tmp_df.loc[tmp_df['price_change'] <= -threshold, 'price_labels' ] = 'down'
   tmp_df.loc[(tmp_df['price_change']>-threshold)& \
              (tmp_df['price_change']<threshold),'price_labels'] ='neutral'
   return tmp_df['price_labels']
