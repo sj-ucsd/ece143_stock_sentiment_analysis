@@ -32,7 +32,20 @@ Module provides APIs extracts financial information for stocks and prepare the d
 ### ml_models
 
 Module used for MLP model. APIs:
+
 1. apply_MLP - apply MLP model (train and test) and return prediction
 2. apply_MLP_on_all_data - Apply MLP model on all stocks in the list 
+
+### scrapers
+
+Provides scripts to scrape news (Yahoo finance), tweets (Twitter) and posts from reddit. This module also applies sentiment analyzer and produces
+sentiment score for analysis:
+
+1. get_yahoo_news - get all articles (backwards) from a specified date for a given stock
+2. get_sentiment_from_news - extract sentiment scores from news articles
+3. getTwitter_data - Retrieve two years worth of tweets for a list of stocks and extract sentiment information
+4. getReddit_data - Retrieve two years worth of tweets for a list of stocks and extract sentiment information
+
+
 
 
