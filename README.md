@@ -41,10 +41,24 @@ Module used for MLP model. APIs:
 Provides scripts to scrape news (Yahoo finance), tweets (Twitter) and posts from reddit. This module also applies sentiment analyzer and produces
 sentiment score for analysis:
 
+#### news_scraper
+
+Provides the following API:
+
 1. get_yahoo_news - get all articles (backwards) from a specified date for a given stock
 2. get_sentiment_from_news - extract sentiment scores from news articles
-3. getTwitter_data - Retrieve two years worth of tweets for a list of stocks and extract sentiment information
-4. getReddit_data - Retrieve two years worth of tweets for a list of stocks and extract sentiment information
+
+#### twitter_scrapper
+
+Provides following API:
+
+1. getTwitter_data - Retrieve two years worth of tweets for a list of stocks and extract sentiment information
+
+#### reddit_scrapper
+
+Provides following API:
+
+1. getReddit_data - Retrieve two years worth of tweets for a list of stocks and extract sentiment information
 
 
 
