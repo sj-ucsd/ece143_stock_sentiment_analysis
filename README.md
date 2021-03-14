@@ -17,4 +17,22 @@ This project analyzes effect of sentiment from various sources on stock price. S
 
 ## Usage
 
-Install the modules described by requirements.txt before running the notebook
+Install the modules described by requirements.txt before running the Visualization notebook
+
+## Modules
+
+### prep_data
+Module provides APIs extracts financial information for stocks and prepare the data. APIs are:
+
+1. get_stock_price - Get historical stock price for a given stock over specified period
+2. get_earnings_data - load earnings data for specified stock from stored CSV file. 
+3. prepare_output_data - create moving average for weekly, monthly and long term and shift by the same amount to match predicted output
+4. prepare_output_labels - create three labels (up, down, neutral) on output data 
+
+### ml_models
+
+Module used for MLP model. APIs:
+1. apply_MLP - apply MLP model (train and test) and return prediction
+2. apply_MLP_on_all_data - Apply MLP model on all stocks in the list 
+
+
